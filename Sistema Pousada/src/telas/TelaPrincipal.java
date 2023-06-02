@@ -45,9 +45,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblFundo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastro = new javax.swing.JMenu();
-        menuCliente = new javax.swing.JMenu();
-        cadastroCliente = new javax.swing.JMenuItem();
-        consultaCliente = new javax.swing.JMenuItem();
+        menuHospede = new javax.swing.JMenu();
+        cadastroHospede = new javax.swing.JMenuItem();
+        consultaHospede = new javax.swing.JMenuItem();
         menuFuncionario = new javax.swing.JMenu();
         novoFuncionario = new javax.swing.JMenuItem();
         consultaFuncionario = new javax.swing.JMenuItem();
@@ -149,26 +149,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastro.setText("Cadastro   |");
         cadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        menuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_cliente.png"))); // NOI18N
-        menuCliente.setText("Clientes");
-        menuCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_cliente.png"))); // NOI18N
+        menuHospede.setText("Hóspede");
+        menuHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        cadastroCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_novo_cadastro.png"))); // NOI18N
-        cadastroCliente.setText("Cadastrar Cliente");
-        cadastroCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+        cadastroHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_novo_cadastro.png"))); // NOI18N
+        cadastroHospede.setText("Cadastrar Hóspede");
+        cadastroHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastroHospede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastroClienteActionPerformed(evt);
+                cadastroHospedeActionPerformed(evt);
             }
         });
-        menuCliente.add(cadastroCliente);
+        menuHospede.add(cadastroHospede);
 
-        consultaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_consultar.png"))); // NOI18N
-        consultaCliente.setText("Consultar");
-        consultaCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        menuCliente.add(consultaCliente);
+        consultaHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_consultar.png"))); // NOI18N
+        consultaHospede.setText("Consultar");
+        consultaHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuHospede.add(consultaHospede);
 
-        cadastro.add(menuCliente);
+        cadastro.add(menuHospede);
 
         menuFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_funcionario.png"))); // NOI18N
         menuFuncionario.setText("Funcionários");
@@ -277,9 +277,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroClienteActionPerformed
+    private void cadastroHospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroHospedeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cadastroClienteActionPerformed
+    }//GEN-LAST:event_cadastroHospedeActionPerformed
 
     private void novoQuartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoQuartosActionPerformed
         // TODO add your handling code here:
@@ -352,11 +352,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogoff;
     private javax.swing.JMenu cadastro;
-    private javax.swing.JMenuItem cadastroCliente;
+    private javax.swing.JMenuItem cadastroHospede;
     private javax.swing.JLabel cargoUsuario;
     private javax.swing.JMenuItem consultaAgenda;
-    private javax.swing.JMenuItem consultaCliente;
     private javax.swing.JMenuItem consultaFuncionario;
+    private javax.swing.JMenuItem consultaHospede;
     private javax.swing.JMenuItem consultaQuarto;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -366,8 +366,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblFundo;
     private javax.swing.JMenu menuAgenda;
-    private javax.swing.JMenu menuCliente;
     private javax.swing.JMenu menuFuncionario;
+    private javax.swing.JMenu menuHospede;
     private javax.swing.JLabel nomeUsusario;
     private javax.swing.JMenuItem novoFuncionario;
     private javax.swing.JMenuItem novoQuartos;

@@ -7,7 +7,7 @@ package telas;
 
 /**
  *
- * @author marce
+ * @author marcos
  */
 public class TelaConsultaFuncionario extends javax.swing.JInternalFrame {
 
@@ -16,6 +16,10 @@ public class TelaConsultaFuncionario extends javax.swing.JInternalFrame {
      */
     public TelaConsultaFuncionario() {
         initComponents();
+        
+        painelFundoBtn.setVisible(false);
+        btnLimpaBusca.setVisible(false);
+        painelEdicao.setVisible(false);
     }
 
     /**
@@ -34,10 +38,16 @@ public class TelaConsultaFuncionario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         btnBusca = new javax.swing.JButton();
         btnLimpaBusca = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaFunci = new javax.swing.JTable();
+        painelFundoBtn = new javax.swing.JPanel();
+        aviso = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        painelEdicao = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        btnConfirmaEdit = new javax.swing.JButton();
+        btnCancelaEdit = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -45,71 +55,169 @@ public class TelaConsultaFuncionario extends javax.swing.JInternalFrame {
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultas"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar Funcionário"));
+
+        campoBuscarNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoBuscarNomeActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Buscar por nome:");
 
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_busca.png"))); // NOI18N
         btnBusca.setText("Buscar");
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaActionPerformed(evt);
+            }
+        });
 
         btnLimpaBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_limpa_busca.png"))); // NOI18N
         btnLimpaBusca.setText("Limpar Busca");
+        btnLimpaBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpaBuscaActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Antes de fazer um novo cadastro, verifique se a pessoa já foi casdastrada!");
+        tabelaFunci.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel3.setText("Para editar ou excluir um cadastro, selecione na tabela o cadastro desejado.");
+            },
+            new String [] {
+                "ID", "Nome", "Sobrenome", "CPF"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_editar_user.png"))); // NOI18N
-        btnEditar.setText("Editar");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tabelaFunci);
+
+        aviso.setText("Para editar ou excluir um cadastro, selecione na tabela o cadastro desejado.");
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_delete_user.png"))); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_editar_user.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelFundoBtnLayout = new javax.swing.GroupLayout(painelFundoBtn);
+        painelFundoBtn.setLayout(painelFundoBtnLayout);
+        painelFundoBtnLayout.setHorizontalGroup(
+            painelFundoBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelFundoBtnLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(aviso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+        );
+        painelFundoBtnLayout.setVerticalGroup(
+            painelFundoBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelFundoBtnLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelFundoBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aviso)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnEditar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel3.setText("Confirmar edição:");
+
+        btnConfirmaEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_confirmar.png"))); // NOI18N
+        btnConfirmaEdit.setText("Confirmar");
+        btnConfirmaEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmaEditActionPerformed(evt);
+            }
+        });
+
+        btnCancelaEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_cancelar.png"))); // NOI18N
+        btnCancelaEdit.setText("Cancelar");
+        btnCancelaEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelaEditActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelEdicaoLayout = new javax.swing.GroupLayout(painelEdicao);
+        painelEdicao.setLayout(painelEdicaoLayout);
+        painelEdicaoLayout.setHorizontalGroup(
+            painelEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelEdicaoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(31, 31, 31)
+                .addComponent(btnConfirmaEdit)
+                .addGap(26, 26, 26)
+                .addComponent(btnCancelaEdit)
+                .addGap(24, 24, 24))
+        );
+        painelEdicaoLayout.setVerticalGroup(
+            painelEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelEdicaoLayout.createSequentialGroup()
+                .addGroup(painelEdicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(btnConfirmaEdit)
+                    .addComponent(btnCancelaEdit))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(346, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoBuscarNome)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBusca)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLimpaBusca))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(41, 41, 41))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(campoBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBusca)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpaBusca))
+                    .addComponent(painelFundoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelEdicao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnBusca)
                     .addComponent(btnLimpaBusca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnEditar)
-                    .addComponent(btnExcluir))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(painelFundoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(painelEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -145,18 +253,67 @@ public class TelaConsultaFuncionario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
+        // TODO add your handling code here:
+        // comando para fazer uma busca no banco, por nomes
+        painelFundoBtn.setVisible(true);
+        btnLimpaBusca.setVisible(true);
+        btnBusca.setVisible(false);
+    }//GEN-LAST:event_btnBuscaActionPerformed
 
+    private void btnLimpaBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpaBuscaActionPerformed
+        // TODO add your handling code here:
+        // comando para limpar a caixa de busca e voltar a tabela com todos os dados
+        // comando para fazer busca por nome
+        painelFundoBtn.setVisible(false);
+        btnLimpaBusca.setVisible(false);
+        btnBusca.setVisible(true);
+    }//GEN-LAST:event_btnLimpaBuscaActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        // comando de confirmarção ou cancelamento do btn editar
+        painelEdicao.setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnCancelaEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaEditActionPerformed
+        // TODO add your handling code here:
+        // cancela o evento de edição do funci
+        painelEdicao.setVisible(false);
+    }//GEN-LAST:event_btnCancelaEditActionPerformed
+
+    private void btnConfirmaEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmaEditActionPerformed
+        // TODO add your handling code here:
+        // confirma a edição das informações de um determinado funci
+    }//GEN-LAST:event_btnConfirmaEditActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        // exclui o funcinário já cadastrado no sistema
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void campoBuscarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarNomeActionPerformed
+        // TODO add your handling code here:
+        // pesquisa por nome e sobrenome
+    }//GEN-LAST:event_campoBuscarNomeActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel aviso;
     private javax.swing.JButton btnBusca;
+    private javax.swing.JButton btnCancelaEdit;
+    private javax.swing.JButton btnConfirmaEdit;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpaBusca;
     private javax.swing.JTextField campoBuscarNome;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel painelEdicao;
+    private javax.swing.JPanel painelFundoBtn;
+    private javax.swing.JTable tabelaFunci;
     // End of variables declaration//GEN-END:variables
 }

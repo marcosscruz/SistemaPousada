@@ -7,7 +7,7 @@ package telas;
 
 /**
  *
- * @author marce
+ * @author marcos
  */
 public class TelaConsultaAgenda extends javax.swing.JInternalFrame {
 

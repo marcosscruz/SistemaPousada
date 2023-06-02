@@ -7,7 +7,7 @@ package telas;
 
 /**
  *
- * @author marce
+ * @author marcos
  */
 public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
 
