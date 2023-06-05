@@ -71,14 +71,6 @@ public class Reserva {
         this.quarto = quarto;
     }
 
-    public int getNumeroQuarto() {
-        return numeroQuarto;
-    }
-
-    public void setNumeroQuarto(int numeroQuarto) {
-        this.numeroQuarto = numeroQuarto;
-    }
-
     // metodos
     public void realizarReservaPreliminar() {
         // colentando dados do hóspede
@@ -110,6 +102,20 @@ public class Reserva {
         }
     }
 
+    public void realizarReservaDefinitiva() {
+        // verifica se a reserva preliminar está dentro do prazo
+        LocalDate umMesAntes = LocalDate.now().plusMonths(1);
+        if (dataInicio.isBefore(umMesAntes)) {
+            System.out.print("Prazo para confirmação expirado, reserva não confirmada!");
+            return;
+        }
+        // atualiza o estado do quarto 
+        quarto.setEstado(true);
+        // reserva preliminar vira definitiva 
+        System.out.print("Reserva difinitiva confirmada!");
+        System.out.println(toString());
+    }
+
     private double calcularPreco(LocalDate dataInicio, LocalDate dataFim) {
         // calcula a quantidade de dias da reserva
         long dias = ChronoUnit.DAYS.between(dataInicio, dataFim);
@@ -123,17 +129,4 @@ public class Reserva {
 
         return precoTotal;
     }
-
-    public boolean verificarDisponibilidade() {
-
-    }
-
-    public void confirmarReserva() {
-
-    }
-
-    public void cancelarReserva() {
-
-    }
-
 }
