@@ -11,15 +11,17 @@ package pousada;
  */
 public class Usuario {
 
+    private static int ultimoId = 0;
+
     private String login;
     private String senha;
     private int id;
 
     // construtor
-    public Usuario(String login, String senha, int id) {
+    public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
-        this.id = id;
+        this.id = ultimoId;
     }
 
     // get e set
@@ -48,11 +50,16 @@ public class Usuario {
     }
 
     // metodos de usuario 
-    public void fazerLogin() {
+    private static int gerarNovoId() {
+        ultimoId++;
+        return ultimoId;
+    }
+
+    protected void fazerLogin() {
 
     }
 
-    public void fazerLogout() {
+    protected void fazerLogout() {
 
     }
 }
