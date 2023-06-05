@@ -74,6 +74,7 @@ public class Reserva {
     // metodos
     public void realizarReservaPreliminar() {
         // colentando dados do hóspede
+        // ainda falta a coleta dos dados pessoais do hóspede
         Scanner scanner = new Scanner(System.in);
         System.out.print("Data início: (DD/MM/AAAA)");
         String dataInicioStr = scanner.nextLine();
@@ -116,7 +117,7 @@ public class Reserva {
         System.out.println(toString());
     }
 
-    private double calcularPreco(LocalDate dataInicio, LocalDate dataFim) {
+    public double calcularPreco(LocalDate dataInicio, LocalDate dataFim) {
         // calcula a quantidade de dias da reserva
         long dias = ChronoUnit.DAYS.between(dataInicio, dataFim);
         // classe ChronoUnit do pacote java.time.temporal para calcular a diferença em dias
