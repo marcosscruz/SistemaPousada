@@ -11,20 +11,26 @@ package pousada;
  */
 public class Administrador extends Funcionario {
 
-    public Administrador(String login, String senha, int id, String nome) {
-        super(login, senha, id, nome);
+    // construtor herdado de funcionário que herdou de usuário
+    public Administrador(String login, String senha, String nome) {
+        super(login, senha, nome);
     }
 
-    // metodos do adm
-    public void adicionarFuncinario() {
-
-    }
-
-    public void removerFuncionario() {
+    // metodos do adm em relação ao gerenciamento de funcionários
+    protected void adicionarFuncinario() {
 
     }
 
-    public void editarFuncionario() {
+    protected void removerFuncionario() {
+
+    }
+
+    protected void editarFuncionario() {
+
+    }
+
+    // gerenciamento de despesas da pousada
+    protected void gerarBalancoMensal() {
 
     }
 

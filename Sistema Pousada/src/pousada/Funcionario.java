@@ -12,9 +12,10 @@ package pousada;
 public class Funcionario extends Usuario {
 
     private String nome;
-
-    public Funcionario(String login, String senha, int id, String nome) {
-        super(login, senha, id);
+    
+    // cosntrutor herdado de usuário com a adição do nome
+    public Funcionario(String login, String senha, String nome) {
+        super(login, senha);
         this.nome = nome;
     }
 
@@ -26,16 +27,16 @@ public class Funcionario extends Usuario {
         this.nome = nome;
     }
 
-    // metodos
-    public void fazerReserva() {
+    // métodos que os funcionários e administrador poderam executar
+    protected void realizarReserva() {
 
     }
 
-    public void cancelarReserva() {
+    protected void cancelarReserva() {
 
     }
 
-    public void editarReserva() {
+    protected void editarReserva() {
 
     }
 
