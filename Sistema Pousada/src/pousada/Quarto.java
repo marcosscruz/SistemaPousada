@@ -182,4 +182,12 @@ public class Quarto {
         System.out.println("Reserva definitiva confirmada!");
         System.out.println(toString());
     }
+
+    @Override
+    public String toString() {
+        String tipoQuarto = tipo ? "Luxo" : "Comum";
+        String estadoQuarto = estado ? "Ocupado" : "Disponível";
+
+        return "Quarto: " + numero + "\nTipo: " + tipoQuarto + "\nEstado: " + estadoQuarto;
+    }
 }
