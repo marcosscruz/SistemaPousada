@@ -21,7 +21,7 @@ public class Usuario {
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
-        this.id = ultimoId;
+        this.id = gerarNovoId();
     }
 
     // get e set
@@ -49,17 +49,21 @@ public class Usuario {
         this.id = id;
     }
 
-    // metodos de usuario 
     private static int gerarNovoId() {
         ultimoId++;
         return ultimoId;
     }
 
+    // metodos de usuario
     protected void fazerLogin() {
 
     }
 
     protected void fazerLogout() {
 
+    }
+
+    private boolean autenticarUsuario() {
+        return false;
     }
 }
