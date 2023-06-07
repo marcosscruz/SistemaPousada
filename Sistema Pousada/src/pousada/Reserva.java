@@ -7,6 +7,8 @@ package pousada;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,7 +21,9 @@ public class Reserva {
     private LocalDate dataFim;
     private double preco;
     private String numeroCartao;
+
     private Quarto quarto;
+    private List<Hospede> listaHospedes;
 
     // construtor
     public Reserva(LocalDate dataInicio, LocalDate dataFim, double preco, String numeroCartao, Quarto quarto) {
@@ -28,6 +32,7 @@ public class Reserva {
         this.preco = preco;
         this.numeroCartao = numeroCartao;
         this.quarto = quarto;
+        this.listaHospedes = new ArrayList<>();
     }
 
     // get e set
@@ -71,11 +76,42 @@ public class Reserva {
         this.quarto = quarto;
     }
 
+    public List<Hospede> getListaHospedes() {
+        return listaHospedes;
+    }
+
+    public void setListaHospedes(List<Hospede> listaHospedes) {
+        this.listaHospedes = listaHospedes;
+    }
+
     // metodos
-    public void realizarReservaPreliminar() {
-        // colentando dados do hóspede
-        // ainda falta a coleta dos dados pessoais do hóspede
+    public void realizarReservaPreliminar() { // colentando dados do hóspede
+
+        // coleta dos dados pessoais
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Nome do Hóspede: ");
+        String nome = scanner.nextLine();
+
+        System.out.println("Endereço do Hóspede: ");
+        String endereco = scanner.nextLine();
+
+        System.out.println("Telefone do Hóspede: ");
+        String telefone = scanner.nextLine();
+
+        System.out.println("E-mail do Hóspede: ");
+        String email = scanner.nextLine();
+
+        System.out.println("Pseudo CPF do Hóspede: ");
+        int cpf = scanner.nextInt();
+
+        Hospede hospede = new Hospede(nome, endereco, telefone, email, cpf); // cria a instância de hóspede
+
+        listaHospedes.add(hospede); // adiciona o hóspede a lista de hóspedes na classe reserva
+
+        System.out.println("Dados do Hóspede adicionado com sucesso!");
+
+        // dados referente a reserva do(s) quarto(s)
         System.out.print("Data início: (DD/MM/AAAA)");
         String dataInicioStr = scanner.nextLine();
         LocalDate dataInicio = LocalDate.parse(dataInicioStr);
@@ -94,8 +130,8 @@ public class Reserva {
             // calcula o preço da reserva preliminar
             double preco = calcularPreco(dataInicio, dataFim);
 
-            // cria a reserva preliminar
-            Reserva reservaPreliminar = new Reserva(dataInicio, dataFim, preco, numeroCartao, quarto);
+            Reserva reservaPreliminar;
+            reservaPreliminar = new Reserva(dataInicio, dataFim, preco, numeroCartao, quarto);
             System.out.print("Reserva preliminar realizada com sucesso!");
             System.out.println(reservaPreliminar.toString());
         } else {
