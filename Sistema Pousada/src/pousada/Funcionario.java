@@ -13,7 +13,7 @@ public class Funcionario extends Usuario {
 
     private String nome;
     
-    // cosntrutor herdado de usuário com a adição do nome
+    // cosntrutor herdado de usuário com a adição do nome do colaborador
     public Funcionario(String login, String senha, String nome) {
         super(login, senha);
         this.nome = nome;

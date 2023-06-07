@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Quarto {
 
-    private int numero;
+    private int numero; // pode se interpretar o número de cada quarto sendo seu respectivo Id
     private boolean estado; // ocupado, disponivel, em reforma, etc...
     private boolean tipo; // quarto de luxo ou quarto comum
     private List<Reserva> reservas;
@@ -67,7 +67,7 @@ public class Quarto {
     public static void adicionarQuarto() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Número do quarto: ");
+        System.out.print("Número do quarto: (1 à 10)");
         int numero = scanner.nextInt();
 
         System.out.print("Estado do quarto: (true - disponível || false - ocupado, etc...) ");

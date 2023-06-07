@@ -5,8 +5,6 @@
  */
 package pousada;
 
-import java.util.Scanner;
-
 /**
  *
  * @author marcos
@@ -17,7 +15,7 @@ public class Hospede {
     private String endereco;
     private String telefone;
     private String email;
-    private int cpf;  // cpf vai funcionar como o identifcador do hóspede
+    private int cpf;  // cpf vai funcionar como o identifcador de cada hóspede
 
     // cosntrutor
     public Hospede(String nome, String endereco, String telefone, String email, int cpf) {
@@ -67,28 +65,6 @@ public class Hospede {
 
     public void setCfp(int cpf) {
         this.cpf = cpf;
-    }
-
-    // entrando dados do cliente em potencial
-    public void adcionarDadosHospede() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Nome do Hóspede: ");
-        nome = scanner.nextLine();
-
-        System.out.println("Endereço do Hóspede: ");
-        endereco = scanner.nextLine();
-
-        System.out.println("Telefone do Hóspede: ");
-        telefone = scanner.nextLine();
-
-        System.out.println("E-mail do Hóspede: ");
-        email = scanner.nextLine();
-
-        System.out.println("Pseudo CPF do Hóspede: ");
-        cpf = scanner.nextInt();
-        
-        System.out.println("Dados do Hóspede adicionado com sucesso!");
     }
 
     // sobrescrevendo o classe para toString
