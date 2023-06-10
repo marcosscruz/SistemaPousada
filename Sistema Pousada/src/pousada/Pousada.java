@@ -1,18 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pousada;
+package Pousada;
+
+import java.io.IOException;
+import java.util.Locale;
 
 /**
  *
- * @author marcos
+ *
+ * @author Marcos Vinícius Santos Cruz
+ * @author Filipe
+ * @version 1.0
  */
+// Q.1 - Implementar todas as classes com base no diagrama de classes criado
 public class Pousada {
 
-    public static void main(String[] args) {
-        Sistema sistema = new Sistema();
-        sistema.executar();
+    public static void main(String[] args) throws IOException {
+        Locale locale = new Locale("pt", "BR");
+        Locale.setDefault(locale);
+    }
+
+    // Q.3 - Sobrescrever o método toString() de todas as classes implementadas
+    @Override
+    public String toString() {
+        return "Sistema Pousada";
     }
 }
