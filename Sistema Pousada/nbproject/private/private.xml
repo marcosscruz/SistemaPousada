@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/marce/OneDrive/Documentos/Estudos/SistemaPousada/Sistema%20Pousada/src/pousada/Usuario.java</file>
-            <file>file:/C:/Users/marce/OneDrive/Documentos/Estudos/SistemaPousada/Sistema%20Pousada/src/pousada/Administrador.java</file>
-            <file>file:/C:/Users/marce/OneDrive/Documentos/Estudos/SistemaPousada/Sistema%20Pousada/src/DataBase/dataBaseUsuario.json</file>
-            <file>file:/C:/Users/marce/OneDrive/Documentos/Estudos/SistemaPousada/Sistema%20Pousada/src/pousada/Funcionario.java</file>
+            <file>file:/C:/Users/marce/OneDrive/Documentos/Estudos/SistemaPousada/Sistema%20Pousada/src/br/com/pousada/pessoas/Hospede.java</file>
+            <file>file:/C:/Users/marce/OneDrive/Documentos/Estudos/SistemaPousada/Sistema%20Pousada/src/BDPousada/Hospede.json</file>
         </group>
     </open-files>
 </project-private>
