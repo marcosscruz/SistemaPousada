@@ -16,6 +16,7 @@ public class Hospede extends Pessoa {
     private String enderecoHospede;
     private String telefoneHospede;
     private String emailHospede;
+    private ArrayList<Reserva> reservasHospede = new ArrayList<>();
 
     /**
      * Q.11 - Criar duas variáveis de classe (static) que irão armazenar quantas
@@ -31,6 +32,17 @@ public class Hospede extends Pessoa {
     private static int hospedeCount1;
     private static int hospedeCount2;
 
+    /**
+     * Construtor parametrizado para o obejeto Hospede
+     * Realiza uma chamada ao construtor parametrizado da classe pai (Pessoa)
+     * 
+     * @param nomePessoa define um nome para o Hóspede
+     * @param sobrenomePessoa define um sobrenome para o Hóspede 
+     * @param CPF define um número de CPF para o Hóspede
+     * @param enderecoHospede define um endereço para o Hóspede
+     * @param telefoneHospede define um telefone de contato para o Hóspede
+     * @param emailHospde define um email de contato para o Hóspede
+     */
     // Q.4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
     public Hospede(String nomePessoa, String sobrenomePessoa, String CPF, String enderecoHospede, String telefoneHospede, String emailHospde) {
         super(nomePessoa, sobrenomePessoa, CPF);
@@ -72,6 +84,14 @@ public class Hospede extends Pessoa {
         this.emailHospede = emailHospede;
     }
 
+    public ArrayList<Reserva> getReservasHospede(){
+        return reservasHospede;
+    }
+
+    public void setReservasHospede(Reserva novaReserva){
+        this.reservasHospede.add(0, novaReserva);
+    }
+
     // Q.11 - a. Utilizando o enfoque de encapsulamento de acordo com a engenharia de software
     public static int getHospedeCount1() {
         return hospedeCount1;
@@ -82,11 +102,11 @@ public class Hospede extends Pessoa {
     }
 
     // Q.11 - b. Usando o controle de acesso do tipo protect
-    public static int getHospedeCount2() {
+    protected static int getHospedeCount2() {
         return hospedeCount2;
     }
 
-    public static void setHospedeCount2(int hospedeCount2) {
+    protected static void setHospedeCount2(int hospedeCount2) {
         Hospede.hospedeCount2 = hospedeCount2 + 1;
     }
 
