@@ -8,10 +8,11 @@ package Pousada;
  * @author Filipe
  */
 
-// Q.1 - Implementar todas as classes com base no diagrama de classes cirado
 
-// Q.14 - Salve e recupere todas as informações dos Clientes, Quartos,
-// Colaboradores e Reservas em um arquivo de texto.
+/**
+ * Q.1 - Implementar todas as classes com base no diagrama de classes cirado
+ * Q.14 - Salve e recupere todas as informações dos Clientes, Quartos, Colaboradores e Reservas em um arquivo de texto.
+ */
 public class ManipuladorJson {
 
     // Construtor padrão
