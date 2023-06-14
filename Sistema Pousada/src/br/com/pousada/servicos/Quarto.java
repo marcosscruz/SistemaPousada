@@ -15,7 +15,7 @@ public class Quarto {
     private static int idTipoQuarto = 0;
 
     private int numeroQuarto;
-    private int statusQuarto;
+    private String statusQuarto; // IMPORTANTE: mudar a tipagem do variável
     private int tipoQuarto; // 1 - luxo || 2 - comum
 
     /**
@@ -25,7 +25,7 @@ public class Quarto {
      * @param statusQuarto define a situação em que o quarto se encontra
      * @param tipoQuarto   define qual o tipo do quarto (luxo ou comum)
      */
-    public Quarto(int numeroQuarto, int statusQuarto, int tipoQuarto) {
+    public Quarto(int numeroQuarto, String statusQuarto, int tipoQuarto) {
         this.numeroQuarto = numeroQuarto;
         this.statusQuarto = statusQuarto;
         this.tipoQuarto = tipoQuarto;
@@ -60,11 +60,11 @@ public class Quarto {
         this.numeroQuarto = Quarto.getIdQuarto();
     }
 
-    public int getStatusQuarto() {
+    public String getStatusQuarto() {
         return statusQuarto;
     }
 
-    public void setStatusQuarto(int statusQuarto) {
+    public void setStatusQuarto(String statusQuarto) {
         this.statusQuarto = statusQuarto;
     }
 
