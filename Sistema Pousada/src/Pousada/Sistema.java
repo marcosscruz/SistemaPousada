@@ -8,7 +8,7 @@ import java.util.Locale;
  *
  * @author Marcos Vinícius Santos Cruz
  * @author Filipe
- * @version 1.0
+ * @version 1.0.06
  */
 // Q.1 - Implementar todas as classes com base no diagrama de classes criado
 public class Sistema {
