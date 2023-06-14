@@ -18,7 +18,8 @@ public class GerenciadorAdm extends GerenciadorFunci {
     private List<Colaborador> colaboradores = new ArrayList<>();
 
     /**
-     *  Q.4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
+     * Q.4 - Utilizar a palavra chave super para implementar os construtores das
+     * subsclasses
      */
     public GerenciadorAdm() {
         super();
@@ -39,7 +40,6 @@ public class GerenciadorAdm extends GerenciadorFunci {
 
     /**
      * Função de cadastro de novos colaboradores no sistema
-     * 
      * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
      * editar seus atributos
      */
@@ -77,7 +77,8 @@ public class GerenciadorAdm extends GerenciadorFunci {
 
     /**
      * Função padrão de acesso às opções de modificações do Colaborador
-     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus atributos
+     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus
+     * atributos
      * 
      * @param cpf chave de busca do objeto Colaborador na base de colaboradores
      *            do sistema
@@ -160,9 +161,11 @@ public class GerenciadorAdm extends GerenciadorFunci {
 
     /**
      * Função padrão para exclusão de um Colaborador
-     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus atributos
+     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus
+     * atributos
      * 
-     * @param cpf chave de busca do objeto Colaborador na base de colaboradores do Sistema
+     * @param cpf chave de busca do objeto Colaborador na base de colaboradores do
+     *            Sistema
      */
     public void excluirColab(String cpf) {
         for (Colaborador colaborador : colaboradores) {
@@ -176,7 +179,38 @@ public class GerenciadorAdm extends GerenciadorFunci {
     }
 
     /**
-     * Função padrão para a validação do número de CPF
+     * Função padrão para impressão de dados dos colaboradores do sistema
+     */
+    public void imprimirColabs() {
+        if (colaboradores.isEmpty()) {
+            System.out.println("Não há colaboradores cadastrados!");
+        } else {
+            for (Colaborador colab : colaboradores) {
+                System.out.println(colab);
+            }
+        }
+    }
+
+    /**
+     * Função para exibição de dados referentes a um colaborador específico
+     * cadastrado no Sistema
+     * 
+     * @param cpf chave de busca do objeto na base de colaboradores do Sistema
+     */
+    public void imprimirColab(String cpf) {
+        Colaborador colaborador = consultaColab(cpf);
+        if (colaborador != null) {
+            System.out.println(colaborador);
+        } else {
+            System.out.println("Coloaborador não cadastrado!");
+        }
+    }
+
+    // =======================================================================================================================================================
+
+    /**
+     * Função padrão para a validação do número de CPF repassado como parâmetro
+     * em cadastros de Clientes e Colaboradores
      * 
      * @param cpf dado fornecido pelo usuário
      * @return validade do CPF
@@ -243,27 +277,6 @@ public class GerenciadorAdm extends GerenciadorFunci {
             System.out.println("Não foi possível validar o CPF!");
             return (false);
         }
-    }
-
-    /**
-     * Função padrão para consulta a um objeto do tipo Colaborador
-     * 
-     * @param cpf chave de comparação entre objetos do tipo Colaborador
-     * @return objeto do tipo colaborador caso a chave esteja cadastrada no sistema
-     */
-    public Colaborador consultaColab(String cpf) {
-        String cpfColab = cpf;
-        Colaborador attColab = null;
-
-        for (Colaborador colab : this.getColaboradores()) {
-            if (colab != null) {
-                if (cpfColab.equals(colab.getCPF())) {
-                    attColab = colab;
-                    break;
-                }
-            }
-        }
-        return attColab;
     }
 
     // Q.3 - Sobrescrever o método toString() de todas as classes implementadas
