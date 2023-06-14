@@ -6,27 +6,35 @@ import java.util.Scanner;
 import br.com.pousada.pessoas.Colaborador;
 
 /**
- * Classe intermediária para funcionalidades direcionadas aos Administradores
+ * Classe intermediária para funcionalidades direcionadas aos Administradores,
+ * além das funcionalidades que os Funcionários já exercem
  *
  * @author Marcos Vinícius Santos Cruz
  * @author Filipe
  */
 // Q.1 - Implementar todas as classes com base no diagrma de classes criado
-public class GerenciadorADM {
+public class GerenciadorAdm extends GerenciadorFunci {
 
     private List<Colaborador> colaboradores = new ArrayList<>();
 
-    // Construtor padrão
-    public GerenciadorADM() {
+    /**
+     *  Q.4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
+     */
+    public GerenciadorAdm() {
+        super();
     }
 
-    // get 
+    // get
     public List<Colaborador> getColaboradores() {
         return colaboradores;
     }
 
     public void addColab(Colaborador colaborador) {
-        colaboradores.add(0, colaborador);
+        colaboradores.add(colaborador);
+    }
+
+    public void removeColab(Colaborador colaborador) {
+        colaboradores.remove(colaborador);
     }
 
     /**
@@ -65,6 +73,106 @@ public class GerenciadorADM {
         Colaborador colaborador = new Colaborador(nomeColab, sobrenomeColab, CPF, loginColab, senhaColab);
         addColab(colaborador);
         System.out.println("Cadastro realizado com sucesso!");
+    }
+
+    /**
+     * Função padrão de acesso às opções de modificações do Colaborador
+     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus atributos
+     * 
+     * @param cpf chave de busca do objeto Colaborador na base de colaboradores
+     *            do sistema
+     */
+    public void editarColab(String cpf) {
+        Scanner scanner = new Scanner(System.in);
+        boolean menuAnaterior = false;
+
+        do {
+            String cpfColab = cpf;
+            if (consultaColab(cpfColab) != null) {
+                Colaborador edtColab = consultaColab(cpfColab);
+                System.out.println("Dados Colaborador");
+                System.out.println(edtColab + "\n--------------------------\n");
+                System.out.println(
+                        "Escolha uma opção: \n1 - Alterar nome \n2 - Alterar CPF \n3 - Alterar login \n4 - Fechar");
+
+                int i = scanner.nextInt();
+                Scanner entraDado = new Scanner(System.in);
+
+                switch (i) {
+                    case 1: {
+                        entraDado = new Scanner(System.in);
+                        System.out.printf("Novo nome: ");
+                        String dado = entraDado.nextLine();
+                        edtColab.setNomePessoa(dado);
+
+                        System.out.printf("Novo sobrenome: ");
+                        dado = entraDado.nextLine();
+                        edtColab.setSobrenomePessoa(dado);
+
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+                    case 2: {
+                        String dado;
+                        do {
+                            System.out.printf("Novo CPF: ");
+                            dado = entraDado.nextLine();
+                            if (validaCPF(dado) == false || consultaColab(cpf) != null) {
+                                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+                            }
+                        } while (validaCPF(dado) == false || consultaColab(cpf) != null);
+
+                        edtColab.setCPF(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        cpfColab = dado;
+                        break;
+                    }
+                    case 3: {
+                        String novoLogin, confirmaLogin;
+                        do {
+                            System.out.printf("Novo login: ");
+                            novoLogin = entraDado.nextLine();
+                            System.out.printf("Confirmar novo login: ");
+                            confirmaLogin = entraDado.nextLine();
+
+                            if (novoLogin.equals(confirmaLogin)) {
+                                edtColab.setLoginUsuario(confirmaLogin);
+                                System.out.println("Alteração realizada com sucesso!");
+                            } else {
+                                System.out.println("Dados não conferem. Tente novamente!\n");
+                            }
+                        } while (!novoLogin.equals(confirmaLogin));
+                        break;
+                    }
+                    case 4: {
+                        menuAnaterior = true;
+                        break;
+                    }
+                    default: {
+                        System.out.println("Opção Inválida!");
+                    }
+                }
+            } else {
+                System.out.println("CPF Inválido!");
+            }
+        } while (menuAnaterior == false);
+    }
+
+    /**
+     * Função padrão para exclusão de um Colaborador
+     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus atributos
+     * 
+     * @param cpf chave de busca do objeto Colaborador na base de colaboradores do Sistema
+     */
+    public void excluirColab(String cpf) {
+        for (Colaborador colaborador : colaboradores) {
+            if (colaborador.getCPF().equals(cpf)) {
+                removeColab(colaborador);
+                System.out.println("Alteração feita com sucesso!");
+                break;
+            }
+        }
+        System.out.println("CPF não encontrado!");
     }
 
     /**
@@ -137,7 +245,7 @@ public class GerenciadorADM {
         }
     }
 
-    /*
+    /**
      * Função padrão para consulta a um objeto do tipo Colaborador
      * 
      * @param cpf chave de comparação entre objetos do tipo Colaborador
@@ -161,6 +269,6 @@ public class GerenciadorADM {
     // Q.3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
-        return "Gerendiador ADM";
+        return "Gerendiador Administrador";
     }
 }
