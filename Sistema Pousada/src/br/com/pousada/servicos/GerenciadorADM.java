@@ -1,9 +1,17 @@
+/**
+ * Além de mim, os funcionários da pousada terão acesso a todas as funcionalidades, exceto ao gerenciamento 
+ * das despesas da pousada e ao balanço mensal de receitas e despesas. Para acesso, é necessário autenticação 
+ * do usuário.
+ */
+
 package br.com.pousada.servicos;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import br.com.pousada.pessoas.Colaborador;
+
+import br.com.pousada.pessoas.Administrador;
+import br.com.pousada.pessoas.Funcionario;
 
 /**
  * Classe intermediária para funcionalidades direcionadas aos Administradores,
@@ -15,8 +23,6 @@ import br.com.pousada.pessoas.Colaborador;
 // Q.1 - Implementar todas as classes com base no diagrma de classes criado
 public class GerenciadorAdm extends GerenciadorFunci {
 
-    private List<Colaborador> colaboradores = new ArrayList<>();
-
     /**
      * Q.4 - Utilizar a palavra chave super para implementar os construtores das
      * subsclasses
@@ -25,29 +31,39 @@ public class GerenciadorAdm extends GerenciadorFunci {
         super();
     }
 
-    // get
-    public List<Colaborador> getColaboradores() {
-        return colaboradores;
+    // =======================================================================================================
+    // FUNCIONALIDADES DO ADMINISTRADOR
+
+    public void gerenciamentoDespesa(){
+        // implementar a lógica 
     }
 
-    public void addColab(Colaborador colaborador) {
-        colaboradores.add(colaborador);
+    public void gerarBalancoMensal(){
+        // implementar a lógica
     }
 
-    public void removeColab(Colaborador colaborador) {
-        colaboradores.remove(colaborador);
+    // =======================================================================================================
+    // MANIPULAÇÃO DE FUNCIONÁRIOS
+
+    private List<Funcionario> funcionarios = new ArrayList<>();
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionario(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
     /**
      * Função de cadastro de novos colaboradores no sistema
      * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
-     * editar seus atributos
+     * editar seus atributos;
      */
-    public void cadastroColab() {
+    public void cadastroFunci() {
         String nomeColab, sobrenomeColab, CPF, loginColab, senhaColab;
         Scanner scanner = new Scanner(System.in);
 
-        // entrada de dados
         System.out.printf("Nome: ");
         nomeColab = scanner.nextLine();
 
@@ -57,9 +73,8 @@ public class GerenciadorAdm extends GerenciadorFunci {
         do {
             System.out.printf("CPF: ");
             CPF = scanner.nextLine();
-
             if (validaCPF(CPF) == false || consultaColab(CPF) != null) {
-                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+                System.out.println("CPF inválido ou já cadastrado. Tente novamente!");
             }
         } while (validaCPF(CPF) == false || consultaColab(CPF) != null);
 
@@ -69,108 +84,122 @@ public class GerenciadorAdm extends GerenciadorFunci {
         System.out.println("Senha: ");
         senhaColab = scanner.nextLine();
 
-        // cadastro
-        Colaborador colaborador = new Colaborador(nomeColab, sobrenomeColab, CPF, loginColab, senhaColab);
-        addColab(colaborador);
-        System.out.println("Cadastro realizado com sucesso!");
+        Funcionario funcionario = new Funcionario(nomeColab, sobrenomeColab, CPF, loginColab, senhaColab);
+        addFunci(funcionario);
+        System.out.println("Cadastro de Funcinário realizado com sucesso!");
     }
 
     /**
      * Função padrão de acesso às opções de modificações do Colaborador
-     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus
-     * atributos
+     * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
+     * editar seus atributos;
      * 
-     * @param cpf chave de busca do objeto Colaborador na base de colaboradores
-     *            do sistema
+     * @param funcionario chave de busca do objeto Funcinario na base de
+     *                    colaboradores do sistema
      */
-    public void editarColab(String cpf) {
-        Scanner scanner = new Scanner(System.in);
+    public void editarFunci(Funcionario funcionario) {
         boolean menuAnaterior = false;
-
         do {
-            String cpfColab = cpf;
-            if (consultaColab(cpfColab) != null) {
-                Colaborador edtColab = consultaColab(cpfColab);
-                System.out.println("Dados Colaborador");
-                System.out.println(edtColab + "\n--------------------------\n");
-                System.out.println(
-                        "Escolha uma opção: \n1 - Alterar nome \n2 - Alterar CPF \n3 - Alterar login \n4 - Fechar");
+            System.out.println(funcionario + "\n--------------------------------\n");
+            Scanner entrarDados = new Scanner(System.in);
+            System.out.println(
+                    "Escolha uma opção: \n\t1. Alterar login \n\t2. Alterar senha \n\t3. Alterar CPF \n\t4. Alterar nome \n\t5. Fechar menu");
+            int opcao = entrarDados.nextInt();
+            switch (opcao) {
+                case 1: {
+                    entrarDados = new Scanner(System.in);
+                    System.out.println("Novo login: ");
+                    String novoLogin = entrarDados.nextLine();
 
-                int i = scanner.nextInt();
-                Scanner entraDado = new Scanner(System.in);
+                    System.out.println("Cofirmar login: ");
+                    String confirmarLogin = entrarDados.nextLine();
 
-                switch (i) {
-                    case 1: {
-                        entraDado = new Scanner(System.in);
-                        System.out.printf("Novo nome: ");
-                        String dado = entraDado.nextLine();
-                        edtColab.setNomePessoa(dado);
-
-                        System.out.printf("Novo sobrenome: ");
-                        dado = entraDado.nextLine();
-                        edtColab.setSobrenomePessoa(dado);
-
-                        System.out.println("Alteração realizada com sucesso!");
+                    if (novoLogin.equals(confirmarLogin)) {
+                        funcionario.setLoginUsuario(confirmarLogin);
                         break;
-                    }
-                    case 2: {
-                        String dado;
-                        do {
-                            System.out.printf("Novo CPF: ");
-                            dado = entraDado.nextLine();
-                            if (validaCPF(dado) == false || consultaColab(cpf) != null) {
-                                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
-                            }
-                        } while (validaCPF(dado) == false || consultaColab(cpf) != null);
-
-                        edtColab.setCPF(dado);
-                        System.out.println("Alteração realizada com sucesso!");
-                        cpfColab = dado;
+                    } else {
+                        System.out.println("Dados inseridos não conferem. Tente novamente.");
                         break;
-                    }
-                    case 3: {
-                        String novoLogin, confirmaLogin;
-                        do {
-                            System.out.printf("Novo login: ");
-                            novoLogin = entraDado.nextLine();
-                            System.out.printf("Confirmar novo login: ");
-                            confirmaLogin = entraDado.nextLine();
-
-                            if (novoLogin.equals(confirmaLogin)) {
-                                edtColab.setLoginUsuario(confirmaLogin);
-                                System.out.println("Alteração realizada com sucesso!");
-                            } else {
-                                System.out.println("Dados não conferem. Tente novamente!\n");
-                            }
-                        } while (!novoLogin.equals(confirmaLogin));
-                        break;
-                    }
-                    case 4: {
-                        menuAnaterior = true;
-                        break;
-                    }
-                    default: {
-                        System.out.println("Opção Inválida!");
                     }
                 }
-            } else {
-                System.out.println("CPF Inválido!");
+                case 2: {
+                    entrarDados = new Scanner(System.in);
+                    System.out.printf("Senha anterior: ");
+                    String senhaAnterior = entrarDados.nextLine();
+
+                    System.out.printf("Nova senha: ");
+                    String novaSenha = entrarDados.nextLine();
+
+                    System.out.printf("Confrimar senha: ");
+                    String confirmarSenha = entrarDados.nextLine();
+
+                    if (funcionario.getSenhaUsuario().equals(senhaAnterior)) {
+                        if (novaSenha.equals(confirmarSenha)) {
+                            funcionario.setSenhaUsuario(novaSenha);
+                            System.out.println("Senha alterada com sucesso!");
+                            break;
+                        } else {
+                            System.out.println("Senhas diferentes! Tente novamente.");
+                            break;
+                        }
+                    } else {
+                        System.out.println("Senha antiga não confere! Tente Novamante.");
+                        break;
+                    }
+
+                }
+                case 3: {
+                    String novoCPF;
+                    entrarDados = new Scanner(System.in);
+                    do {
+                        System.out.println("Novo CPF: ");
+                        novoCPF = entrarDados.nextLine();
+                        if (GerenciadorAdm.validaCPF(novoCPF) == false || consultaColab(novoCPF) != null) {
+                            System.out.println("CFP inválido ou já cadastrado! Tente novamente.");
+                            break;
+                        }
+                    } while (GerenciadorAdm.validaCPF(novoCPF) == false || consultaColab(novoCPF) != null);
+                    funcionario.setCPF(novoCPF);
+                    System.out.println("Alteração feita com sucesso!");
+                    break;
+                }
+                case 4: {
+                    entrarDados = new Scanner(System.in);
+                    System.out.printf("Novo nome: ");
+                    String novoNome = entrarDados.nextLine();
+                    funcionario.setNomePessoa(novoNome);
+
+                    System.out.printf("Novo sobrenome: ");
+                    String novoSobrenome = entrarDados.nextLine();
+                    funcionario.setSobrenomePessoa(novoSobrenome);
+
+                    System.out.println("Alteração feita com sucesso!");
+                    break;
+                }
+                case 5: {
+                    menuAnaterior = true;
+                    break;
+                }
+                default: {
+                    System.out.println("Opção Inválida! Tente novamente.");
+                    break;
+                }
             }
         } while (menuAnaterior == false);
     }
 
     /**
-     * Função padrão para exclusão de um Colaborador
-     * Q.6 - Deve ser possível cadastrar os clientes no sistema e alterar seus
-     * atributos
+     * Função padrão para exclusão de um Funcionario
+     * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
+     * editar seus atributos;
      * 
      * @param cpf chave de busca do objeto Colaborador na base de colaboradores do
      *            Sistema
      */
-    public void excluirColab(String cpf) {
-        for (Colaborador colaborador : colaboradores) {
-            if (colaborador.getCPF().equals(cpf)) {
-                removeColab(colaborador);
+    public void excluirFunci(String cpf) {
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario.getCPF().equals(cpf)) {
+                removeFunic(funcionario);
                 System.out.println("Alteração feita com sucesso!");
                 break;
             }
@@ -178,36 +207,181 @@ public class GerenciadorAdm extends GerenciadorFunci {
         System.out.println("CPF não encontrado!");
     }
 
-    /**
-     * Função padrão para impressão de dados dos colaboradores do sistema
-     */
-    public void imprimirColabs() {
-        if (colaboradores.isEmpty()) {
-            System.out.println("Não há colaboradores cadastrados!");
-        } else {
-            for (Colaborador colab : colaboradores) {
-                System.out.println(colab);
-            }
-        }
+    // =======================================================================================================================================================
+    // MANIPULAÇÃO DE ADMINISTRADORES
+
+    private List<Administrador> administradores = new ArrayList<>();
+
+    public List<Administrador> getAdministradores() {
+        return administradores;
+    }
+
+    public void setAdministradores(List<Administrador> administradores) {
+        this.administradores = administradores;
+    }
+
+    public void addAdm(Administrador administrador) {
+        administradores.add(administrador);
+    }
+
+    public void removeAdm(Administrador administrador) {
+        administradores.remove(administrador);
     }
 
     /**
-     * Função para exibição de dados referentes a um colaborador específico
-     * cadastrado no Sistema
-     * 
-     * @param cpf chave de busca do objeto na base de colaboradores do Sistema
+     *  Função de cadastro de novos colaboradores no sistema
+     * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
+     * editar seus atributos;
      */
-    public void imprimirColab(String cpf) {
-        Colaborador colaborador = consultaColab(cpf);
-        if (colaborador != null) {
-            System.out.println(colaborador);
-        } else {
-            System.out.println("Coloaborador não cadastrado!");
+    public void cadastradoAdm() {
+        String nomeColab, sobrenomeColab, CPF, loginColab, senhaColab;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.printf("Nome: ");
+        nomeColab = scanner.nextLine();
+
+        System.out.printf("Sobrenome: ");
+        sobrenomeColab = scanner.nextLine();
+
+        do {
+            System.out.printf("CPF: ");
+            CPF = scanner.nextLine();
+            if (validaCPF(CPF) == false || consultaColab(CPF) != null) {
+                System.out.println("CPF inválido ou já cadastrado! Tente novamente.");
+            }
+        } while (validaCPF(CPF) == false || consultaColab(CPF) != null);
+
+        System.out.println("Login: ");
+        loginColab = scanner.nextLine();
+
+        System.out.println("Senha: ");
+        senhaColab = scanner.nextLine();
+
+        Administrador administrador = new Administrador(nomeColab, sobrenomeColab, CPF, loginColab, senhaColab);
+        addAdm(administrador);
+        System.out.println("Cadastro de Administrsdor feito com sucesso!");
+    }
+
+    /**
+     * Função padrão de acesso às opções de modificações do Colaborador
+     * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
+     * editar seus atributos;
+     * 
+     * @param administrador chave que indica o parâmetro administrador é do tipo
+     *                      Administrador.
+     */
+    public void editarAdm(Administrador administrador) {
+        boolean menuAnaterior = false;
+        do {
+            System.out.println(administrador + "\n--------------------------------\n");
+            Scanner entrarDados = new Scanner(System.in);
+            System.out.println(
+                    "Escolha uma opção: \n\t1. Alterar login \n\t2. Alterar senha \n\t3. Alterar CPF \n\t4. Alterar nome \n\t5. Fechar menu");
+            int opcao = entrarDados.nextInt();
+            switch (opcao) {
+                case 1: {
+                    entrarDados = new Scanner(System.in);
+                    System.out.println("Novo login: ");
+                    String novoLogin = entrarDados.nextLine();
+
+                    System.out.println("Cofirmar login: ");
+                    String confirmarLogin = entrarDados.nextLine();
+
+                    if (novoLogin.equals(confirmarLogin)) {
+                        administrador.setLoginUsuario(confirmarLogin);
+                        break;
+                    } else {
+                        System.out.println("Dados inseridos não conferem. Tente novamente.");
+                        break;
+                    }
+                }
+                case 2: {
+                    entrarDados = new Scanner(System.in);
+                    System.out.printf("Senha anterior: ");
+                    String senhaAnterior = entrarDados.nextLine();
+
+                    System.out.printf("Nova senha: ");
+                    String novaSenha = entrarDados.nextLine();
+
+                    System.out.printf("Confrimar senha: ");
+                    String confirmarSenha = entrarDados.nextLine();
+
+                    if (administrador.getSenhaUsuario().equals(senhaAnterior)) {
+                        if (novaSenha.equals(confirmarSenha)) {
+                            administrador.setSenhaUsuario(novaSenha);
+                            System.out.println("Senha alterada com sucesso!");
+                            break;
+                        } else {
+                            System.out.println("Senhas diferentes! Tente novamente.");
+                            break;
+                        }
+                    } else {
+                        System.out.println("Senha antiga não confere! Tente Novamante.");
+                        break;
+                    }
+
+                }
+                case 3: {
+                    String novoCPF;
+                    entrarDados = new Scanner(System.in);
+                    do {
+                        System.out.println("Novo CPF: ");
+                        novoCPF = entrarDados.nextLine();
+                        if (GerenciadorAdm.validaCPF(novoCPF) == false || consultaColab(novoCPF) != null) {
+                            System.out.println("CFP inválido ou já cadastrado! Tente novamente.");
+                            break;
+                        }
+                    } while (GerenciadorAdm.validaCPF(novoCPF) == false || consultaColab(novoCPF) != null);
+                    administrador.setCPF(novoCPF);
+                    System.out.println("Alteração feita com sucesso!");
+                    break;
+                }
+                case 4: {
+                    entrarDados = new Scanner(System.in);
+                    System.out.printf("Novo nome: ");
+                    String novoNome = entrarDados.nextLine();
+                    administrador.setNomePessoa(novoNome);
+
+                    System.out.printf("Novo sobrenome: ");
+                    String novoSobrenome = entrarDados.nextLine();
+                    administrador.setSobrenomePessoa(novoSobrenome);
+
+                    System.out.println("Alteração feita com sucesso!");
+                    break;
+                }
+                case 5: {
+                    menuAnaterior = true;
+                    break;
+                }
+                default: {
+                    System.out.println("Opção Inválida! Tente novamente.");
+                    break;
+                }
+            }
+        } while (menuAnaterior == false);
+    }
+
+    /**
+     * Função padrão para exclusão de um Administrador
+     * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
+     * editar seus atributos;
+     * 
+     * @param cpf chave de busca do objeto Colaborador na base de colaboradores do
+     *            Sistema
+     */
+    public void excluirAdm(String cpf) {
+        for (Administrador administrador : administradores) {
+            if (administrador.getCPF().equals(cpf)) {
+                removeAdm(administrador);
+                System.out.println("Alteração feita com sucesso!");
+                break;
+            }
         }
+        System.out.println("CPF não encontrado!");
     }
 
     // =======================================================================================================================================================
-
+    // VALIDAÇÃO DE CPF
     /**
      * Função padrão para a validação do número de CPF repassado como parâmetro
      * em cadastros de Clientes e Colaboradores
