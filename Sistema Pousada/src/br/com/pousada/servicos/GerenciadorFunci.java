@@ -1,14 +1,18 @@
 package br.com.pousada.servicos;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.pousada.pessoas.Colaborador;
+import br.com.pousada.pessoas.Funcionario;
 import br.com.pousada.pessoas.Hospede;
+import br.com.pousada.pessoas.HospedeComparator;
 
 /**
- * Classe intermediária para funcionalidades direcionadas aos Administradores
+ * Classe intermediária para funcionalidades direcionadas aos Funcionários
  *
  * @author Marcos Vinícius Santos Cruz
  * @author Filipe
@@ -16,9 +20,14 @@ import br.com.pousada.pessoas.Hospede;
 // Q.1 - Implementar todas as classes com base no diagrma de classes criado
 public class GerenciadorFunci {
 
+    private List<Funcionario> funcionarios = new ArrayList<>();
     private List<Colaborador> colaboradores = new ArrayList<>();
 
-    // get
+    // Construtor padrão
+    public GerenciadorFunci() {
+    }
+
+    // get e set
     public List<Colaborador> getColaboradores() {
         return colaboradores;
     }
@@ -31,13 +40,23 @@ public class GerenciadorFunci {
         colaboradores.remove(colaborador);
     }
 
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void addFunci(Funcionario funcionario) {
+        funcionarios.add(funcionario);
+    }
+
+    public void removeFunic(Funcionario funcionario) {
+        funcionarios.remove(funcionario);
+    }
+
+    // ===========================================================================================================
+    // CRIAÇÃO DOS QUARTOS DE FORMA ESTÁTICA
     // Q.5 - O sistema deverá armazenar de forma estática os 10 quartos da pousada.
     private static Quarto quartosLuxo[] = new Quarto[5];
     private static Quarto quartosComum[] = new Quarto[5];
-
-    // Construtor
-    public GerenciadorFunci() {
-    }
 
     /**
      * @return Lista de quartos cadastrados no Sistema
@@ -52,17 +71,23 @@ public class GerenciadorFunci {
 
     /**
      * @param quartos lista de objetos Quarto representando a lista de quartos de
-     *                luxo e comuns
+     *                luxo
      */
     public static void setQuartosLuxo(Quarto[] quartos) {
         GerenciadorFunci.quartosLuxo = quartos;
     }
 
+    /**
+     * @param quartos lista de objetos Quarto representando a lista de quartos
+     *                comuns
+     */
     public static void setQaurtosComum(Quarto[] quartos) {
         GerenciadorFunci.quartosComum = quartos;
     }
 
     // ======================================================================================================================
+    // MANIPULAÇÃO DA LISTA DE QUARTOS
+    // Q.5 - O sistema deverá armazenar de forma estática os 10 quartos da pousada.
 
     /**
      * Função para adição de novos quartos de luxo à lista mantida pelo Sistema
@@ -126,27 +151,18 @@ public class GerenciadorFunci {
     }
 
     // ============================================================================================================================================
-    // MANIPULAÇÃO DE HÓSPEDES/CLIENTES
 
     /**
      * Q.9 - As reservas e os clientes devem ser salvas de forma dinâmica no
      * sistema.
      */
     private static ArrayList<Hospede> listaHospedes = new ArrayList<>();
-    private static ArrayList<Reserva> listaReservas = new ArrayList<>();
 
     /**
      * @return lista de hóspedes cadastrados no Sistema
      */
-    public static ArrayList<Hospede> getHospedes() {
+    public static ArrayList<Hospede> getListaHospedes() {
         return listaHospedes;
-    }
-
-    /**
-     * @return lista de reservas cadastradas no Sistema
-     */
-    public static ArrayList<Reserva> getReservas() {
-        return listaReservas;
     }
 
     /**
@@ -161,8 +177,8 @@ public class GerenciadorFunci {
      * protect;
      */
     private static int hospedeCountPrivate;
-    protected static int hospedeCountProtected; 
-    // IMPORTATE: mover para classe sistema 
+    protected static int hospedeCountProtected;
+    // IMPORTATE: mover para classe sistema
 
     /**
      * Enfoque no encapsulamento
@@ -187,7 +203,7 @@ public class GerenciadorFunci {
      */
     public static void setHospedeCountPrivate() {
         int qnt = 0;
-        for (Hospede h1 : GerenciadorFunci.getHospedes()) {
+        for (Hospede h1 : GerenciadorFunci.getListaHospedes()) {
             qnt++;
         }
         GerenciadorFunci.hospedeCountPrivate = qnt;
@@ -195,7 +211,7 @@ public class GerenciadorFunci {
 
     public static void setHospedeCountProtected() {
         int qnt = 0;
-        for (Hospede h1 : GerenciadorFunci.getHospedes()) {
+        for (Hospede h1 : GerenciadorFunci.getListaHospedes()) {
             qnt++;
         }
         hospedeCountProtected = qnt;
@@ -208,8 +224,11 @@ public class GerenciadorFunci {
         GerenciadorFunci.listaHospedes = hospedes;
     }
 
-    // ==================================================================================================================
-
+    // ===================================================================================================================================
+    // MANIPULAÇÃO DE HÓSPEDES/CLIENTES
+    /**
+     * Q.7 - Cadastrar, alterar ou excluir clientes;
+     */
     public void cadHospede() {
         String nomeHospede, sobrenomeHospede, CPF, enderecoHospede, telefoneHospede, emailHospde;
 
@@ -245,43 +264,28 @@ public class GerenciadorFunci {
     }
 
     /**
-     * Função para consulta a um objeto do tipo Hospede na base de hospedes
-     * cadastrados no Sistema
-     * 
-     * @param cpf chave de busca na base de dados do Sistema
-     * @return objeto hospede caso a chave estaja devidamente cadastrada
-     */
-    public static Hospede consultaHospede(String cpf) {
-        String cpfHospede = cpf;
-        Hospede attHospede = new Hospede();
-        attHospede = null;
-
-        for (Hospede hospede : GerenciadorFunci.getHospedes()) {
-            if (cpfHospede.equals(hospede.getCPF())) {
-                attHospede = hospede;
-                break;
-            }
-        }
-        return attHospede;
-    }
-
-    /**
      * Função para a exclusão de hóspedes cadastrados no Sistema
+     * Q.7 - Cadastrar, alterar ou excluir clientes;
      * 
      * @param cpf chave de busca na base de dados de hóspedes cadastrados no Sistema
      */
     public void excluirHospede(String cpf) {
         String cpfHospede = cpf;
 
-        for (Hospede hospede : GerenciadorFunci.getHospedes()) {
+        for (Hospede hospede : GerenciadorFunci.getListaHospedes()) {
             if (cpfHospede.equals(hospede.getCPF())) {
-                GerenciadorFunci.getHospedes().remove(hospede);
+                GerenciadorFunci.getListaHospedes().remove(hospede);
                 break;
             }
         }
         System.out.println("Alteração feita com sucesso!");
     }
 
+    /**
+     * Q.7 - Cadastrar, alterar ou excluir clientes;
+     * 
+     * @param cpf chave de busca na base de dados de hóspedes cadastrados no Sistema
+     */
     public void alterarHospede(String cpf) {
         Scanner inputSwitch = new Scanner(System.in);
         boolean menuAnaterior = false;
@@ -295,22 +299,55 @@ public class GerenciadorFunci {
                 System.out.println(
                         "Escolha uma opção: \n\t1. Alterar nome \n\t2. Alterar CPF \n\t3. Alterar Endereço \n\t4. Alterar telefone \n\t5. Alterar e-mail \n\t6. Fechar");
                 int opcao = inputSwitch.nextInt();
+                Scanner inputDados = new Scanner(System.in);
 
                 switch (opcao) {
                     case 1: {
+                        inputDados = new Scanner(System.in);
+                        System.out.printf("Novo nome: ");
+                        String dado = inputDados.nextLine();
+                        altHospede.setNomePessoa(dado);
 
+                        System.out.printf("Novo sobrenome: ");
+                        dado = inputDados.nextLine();
+                        altHospede.setSobrenomePessoa(dado);
+                        System.out.println("Alteração feita com sucesso!");
+                        break;
                     }
                     case 2: {
-
+                        String dado;
+                        do {
+                            System.out.printf("Novo CPF: ");
+                            dado = inputDados.nextLine();
+                            if (GerenciadorAdm.validaCPF(dado) == false || consultaHospede(cpf) != null) {
+                                System.out.println("CPF inválido ou já cadastrado. Tente outra vez!");
+                            }
+                        } while (GerenciadorAdm.validaCPF(dado) == false || consultaHospede(cpf) != null);
+                        altHospede.setCPF(dado);
+                        System.out.println("CPF alterado com sucesso!");
+                        cpfHospede = dado;
+                        break;
                     }
                     case 3: {
-
+                        System.out.printf("Novo endereço: ");
+                        String dado = inputDados.nextLine();
+                        altHospede.setEnderecoHospede(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
                     }
                     case 4: {
-
+                        System.out.printf("Novo telefone: ");
+                        String dado = inputDados.nextLine();
+                        altHospede.setTelefoneHospede(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
                     }
                     case 5: {
-
+                        System.out.printf("Novo e-mail: ");
+                        String dado = inputDados.nextLine();
+                        altHospede.setEmailHospede(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
                     }
                     case 6: {
                         menuAnaterior = true;
@@ -326,7 +363,78 @@ public class GerenciadorFunci {
         } while (menuAnaterior == false);
     }
 
+    public void imprimirHospedes() {
+        // Q.13 - Implementar a interface Comparator para as classes Cliente e Reserva e
+        // fazer comparações por diferentes atributos.
+        HospedeComparator comparator = new HospedeComparator();
+        Collections.sort(GerenciadorFunci.getListaHospedes(), comparator);
+        for (Hospede hospede : GerenciadorFunci.getListaHospedes()) {
+            if (hospede != null) {
+                System.out.println(hospede);
+            }
+        }
+    }
+
+    /**
+     * Função para exibição de dados de um Hóspede/Cliente específico
+     * 
+     * @param cpf chave de busac do hóspede/cliente cadastrado no sistema
+     */
+    public void imprimirHospede(String cpf) {
+        if (consultaHospede(cpf) != null) {
+            System.out.println(consultaHospede(cpf));
+        }
+    }
+
     // ======================================================================================================================
+    // MANIPULAÇÃO DA LISTA DE RESERVAS
+
+    /**
+     * Fornece métodos para formatar uma data/hora em uma determinada
+     * representação de string e também para analisar uma string em um objeto de
+     * data/hora.
+     */
+    DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd/mm/aaaa");
+    DateTimeFormatter localHourFormatter = DateTimeFormatter.ofPattern("hh:mm");
+
+    /**
+     * Q.9 - As reservas e os clientes devem ser salvas de forma dinâmica no
+     * sistema.
+     */
+    private static ArrayList<Reserva> listaReservas = new ArrayList<>();
+
+    /**
+     * @return lista de reservas cadastradas no Sistema
+     */
+    public static ArrayList<Reserva> getListaReservas() {
+        return listaReservas;
+    }
+
+    /**
+     * @param listaReservas define a lista de reservas a ser casdastrada no Sistema
+     */
+    private static void setListaReservas(ArrayList<Reserva> listaReservas) {
+        GerenciadorFunci.listaReservas = listaReservas;
+    }
+
+    public void reservaPreliminar() {
+        // implementar a lógica
+    }
+
+    public void reservaDefinitiva() {
+        // implementar a lógica
+    }
+
+    /**
+     * Q.8 - Verificar e imprimir dados das reservas e dos clientes;
+     */
+
+    public void imprimirReserva() {
+        // implementar a lógica
+    }
+
+    // ======================================================================================================================
+    // ÁREA DE CONSULTA
 
     /**
      * Função padrão para consulta a um objeto do tipo Colaborador
@@ -347,6 +455,48 @@ public class GerenciadorFunci {
             }
         }
         return attColab;
+    }
+
+    /**
+     * Função para consulta a um objeto do tipo Hospede na base de hospedes
+     * cadastrados no Sistema
+     * 
+     * @param cpf chave de busca na base de dados do Sistema
+     * @return objeto hospede caso a chave estaja devidamente cadastrada
+     */
+    public static Hospede consultaHospede(String cpf) {
+        String cpfHospede = cpf;
+        Hospede attHospede = new Hospede();
+        attHospede = null;
+
+        for (Hospede hospede : GerenciadorFunci.getListaHospedes()) {
+            if (cpfHospede.equals(hospede.getCPF())) {
+                attHospede = hospede;
+                break;
+            }
+        }
+        return attHospede;
+    }
+
+    /**
+     * Função padrão para consulta a um objeto do tipo Funcionario
+     * 
+     * @param cpf chave de comparação entre objetos do tipo Funcinario
+     * @return objeto do tipo funcionário caso a chave esteja cadastrada no sistema
+     */
+    public Funcionario consultaFunci(String cpf) {
+        String cpfColab = cpf;
+        Funcionario attFunci = null;
+
+        for (Funcionario funcionario : this.getFuncionarios()) {
+            if (funcionario != null) {
+                if (cpfColab.equals(funcionario.getCPF())) {
+                    attFunci = funcionario;
+                    break;
+                }
+            }
+        }
+        return attFunci;
     }
 
     // Q.3 - sobrescrever o método toString() de todas as classes implementadas
