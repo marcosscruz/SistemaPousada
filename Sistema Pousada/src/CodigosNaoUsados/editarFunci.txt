@@ -1,0 +1,84 @@
+/**
+     * Função padrão de acesso às opções de modificações do Colaborador
+     * Q.6 - Deve ser possível cadastrar os colaboradores no sistema, alterar ou
+     * editar seus atributos;
+     * 
+     * @param cpf chave de busca do objeto Colaborador na base de colaboradores
+     *            do sistema
+     */
+
+    public void editarFunci(String cpf) {
+        Scanner scanner = new Scanner(System.in);
+        boolean menuAnaterior = false;
+
+        do {
+            String cpfColab = cpf;
+            if (consultaFunci(cpfColab) != null) {
+                Funcionario edtFunci = consultaFunci(cpfColab);
+                System.out.println("Dados Funcinário");
+                System.out.println(edtFunci + "\n--------------------------\n");
+                System.out.println(
+                        "Escolha uma opção: \n\t1 - Alterar nome \n\t2 - Alterar CPF \n\t3 - Alterar login \n\t4 - Fechar");
+
+                int opcao = scanner.nextInt();
+                Scanner entraDado = new Scanner(System.in);
+
+                switch (opcao) {
+                    case 1: {
+                        entraDado = new Scanner(System.in);
+                        System.out.printf("Novo nome: ");
+                        String dado = entraDado.nextLine();
+                        edtFunci.setNomePessoa(dado);
+
+                        System.out.printf("Novo sobrenome: ");
+                        dado = entraDado.nextLine();
+                        edtFunci.setSobrenomePessoa(dado);
+
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+                    case 2: {
+                        String dado;
+                        do {
+                            System.out.printf("Novo CPF: ");
+                            dado = entraDado.nextLine();
+                            if (validaCPF(dado) == false || consultaFunci(cpf) != null) {
+                                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+                            }
+                        } while (validaCPF(dado) == false || consultaFunci(cpf) != null);
+
+                        edtFunci.setCPF(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        cpfColab = dado;
+                        break;
+                    }
+                    case 3: {
+                        String novoLogin, confirmaLogin;
+                        do {
+                            System.out.printf("Novo login: ");
+                            novoLogin = entraDado.nextLine();
+                            System.out.printf("Confirmar novo login: ");
+                            confirmaLogin = entraDado.nextLine();
+
+                            if (novoLogin.equals(confirmaLogin)) {
+                                edtFunci.setLoginUsuario(confirmaLogin);
+                                System.out.println("Alteração realizada com sucesso!");
+                            } else {
+                                System.out.println("Dados não conferem. Tente novamente!\n");
+                            }
+                        } while (!novoLogin.equals(confirmaLogin));
+                        break;
+                    }
+                    case 4: {
+                        menuAnaterior = true;
+                        break;
+                    }
+                    default: {
+                        System.out.println("Opção Inválida!");
+                    }
+                }
+            } else {
+                System.out.println("CPF Inválido!");
+            }
+        } while (menuAnaterior == false);
+    }
