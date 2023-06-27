@@ -12,7 +12,7 @@ import br.com.pousada.servicos.Reserva;
  * Classe principal para o Sistema da Pousada contendo o método main()
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  * @version 1.0.07
  */
 // Q.1 - Implementar todas as classes com base no diagrama de classes criado

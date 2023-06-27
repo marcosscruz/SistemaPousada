@@ -3,7 +3,7 @@ package Pousada;
 import java.io.IOException;
 
 import br.com.pousada.pessoas.Usuario;
-import br.com.pousada.servicos.GerenciadorAdm;
+import br.com.pousada.servicos.GerenciadorAdm;  
 
 /**
  * Classe representativa do Menu de Opções do Sistema

@@ -428,7 +428,6 @@ public class GerenciadorFunci {
     /**
      * Q.8 - Verificar e imprimir dados das reservas e dos clientes;
      */
-
     public void imprimirReserva() {
         // implementar a lógica
     }
