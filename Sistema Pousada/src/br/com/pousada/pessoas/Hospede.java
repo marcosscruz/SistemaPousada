@@ -8,7 +8,7 @@ import br.com.pousada.servicos.*;
  * Classe representativa da entidade Cliente/Hóspede no Sistema
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrama de classes criado
 public class Hospede extends Pessoa {

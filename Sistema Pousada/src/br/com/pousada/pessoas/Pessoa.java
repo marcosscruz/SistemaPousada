@@ -5,7 +5,7 @@ package br.com.pousada.pessoas;
  * Classe abstrata para representação da entidade Pessoa no Sistema
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 public abstract class Pessoa {
 

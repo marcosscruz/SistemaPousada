@@ -5,7 +5,7 @@ package br.com.pousada.pessoas;
  * Classe representativa da entidade Usuário do Sistema
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrama de classes criado
 public class Usuario extends Pessoa {

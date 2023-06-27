@@ -1,9 +1,3 @@
-/**
- * Além de mim, os funcionários da pousada terão acesso a todas as funcionalidades, exceto ao gerenciamento 
- * das despesas da pousada e ao balanço mensal de receitas e despesas. Para acesso, é necessário autenticação 
- * do usuário.
- */
-
 package br.com.pousada.servicos;
 
 import java.util.ArrayList;
@@ -18,7 +12,7 @@ import br.com.pousada.pessoas.Funcionario;
  * além das funcionalidades que os Funcionários já exercem
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrma de classes criado
 public class GerenciadorAdm extends GerenciadorFunci {

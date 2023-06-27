@@ -15,7 +15,7 @@ import br.com.pousada.pessoas.HospedeComparator;
  * Classe intermediária para funcionalidades direcionadas aos Funcionários
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrma de classes criado
 public class GerenciadorFunci {

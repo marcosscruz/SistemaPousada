@@ -4,7 +4,7 @@ package Pousada;
  * Classe que contém métodos de manipulação de arquivos JSON
  * 
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 
 /**

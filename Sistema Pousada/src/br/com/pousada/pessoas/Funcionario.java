@@ -5,7 +5,7 @@ package br.com.pousada.pessoas;
  * Classe representativa da entidade Funcionário no Sistema
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrama de classes criado
 // Q.2 - O sistema será utilizado pelos colaboradores e pelo administrador

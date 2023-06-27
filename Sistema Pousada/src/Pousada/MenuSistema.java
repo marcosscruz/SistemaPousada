@@ -9,7 +9,7 @@ import br.com.pousada.servicos.GerenciadorAdm;
  * Classe representativa do Menu de Opções do Sistema
  * 
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrama de classes criado
 public class MenuSistema {

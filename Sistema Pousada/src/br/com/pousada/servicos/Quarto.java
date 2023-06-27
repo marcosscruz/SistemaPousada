@@ -5,7 +5,7 @@ package br.com.pousada.servicos;
  * Classe representativa da entidade Quarto no Sistema
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrama de classes criado
 // Q.5 - O sistema deverá armazenar de forma estática os 10 quartos da pousada.

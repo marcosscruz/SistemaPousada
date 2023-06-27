@@ -7,7 +7,7 @@ import java.util.*;
  * Classe Comparator para a classe Cliente/Hóspede
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 // Q.1 - Implementar todas as classes com base no diagrma de classes criado
 // Q.13 - Implementar a interface Comparator para as classes Cliente e Reserva

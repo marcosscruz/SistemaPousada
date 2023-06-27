@@ -7,7 +7,7 @@ import java.util.*;
  * Classe comparator para a classe Reserva
  *
  * @author Marcos Vinícius Santos Cruz
- * @author Filipe
+ * @author Filipe Fernades Costa
  */
 public class ReservaComparator implements Comparator<Reserva> {
 
